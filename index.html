@@ -56,25 +56,14 @@
                     <a href="#" class="tab-link text-lg font-semibold text-slate-600 hover:text-blue-500 border-b-2 border-transparent pb-1 transition-colors" data-tab="about-content">About</a>
                 </nav>
 
-                <div class="md:hidden">
-                    <button id="mobile-menu-button" class="text-slate-600 focus:outline-none focus:ring-2 focus:ring-blue-500 p-2 rounded-md">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
-                        </svg>
-                    </button>
+                <div class="flex items-center space-x-4 md:hidden">
+                    <a href="#" class="button bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-full text-sm font-semibold transition-colors" data-tab="booking-content">Book Now</a>
+                    <a href="https://pet-parents.scoutforpets.com/" target="_blank" class="button bg-slate-200 hover:bg-slate-300 text-slate-700 px-4 py-2 rounded-full text-sm font-semibold transition-colors">Client Login</a>
                 </div>
+                
             </div>
         </div>
-
-        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-slate-200 py-4">
-            <nav class="flex flex-col items-center space-y-4 px-4">
-                <a href="#" class="tab-link text-lg font-semibold text-slate-600 hover:text-blue-500 py-2 w-full text-center" data-tab="home-content">Home</a>
-                <a href="#" class="tab-link text-lg font-semibold text-slate-600 hover:text-blue-500 py-2 w-full text-center" data-tab="booking-content">Book Now</a>
-                <a href="https://pet-parents.scoutforpets.com/" target="_blank" class="text-lg font-semibold text-slate-600 hover:text-blue-500 py-2 w-full text-center">Client Login</a>
-                <a href="#" class="tab-link text-lg font-semibold text-slate-600 hover:text-blue-500 py-2 w-full text-center" data-tab="about-content">About</a>
-            </nav>
-        </div>
-    </header>
+        </header>
 
     <main>
         <div id="home-content" class="tab-content">
@@ -162,10 +151,10 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            const tabLinks = document.querySelectorAll('.tab-link, .button[data-tab]'); // Exclude external link from tab-link selector
+            const tabLinks = document.querySelectorAll('.tab-link, .button[data-tab]'); 
             const tabContents = document.querySelectorAll('.tab-content');
-            const mobileMenuButton = document.getElementById('mobile-menu-button');
-            const mobileMenu = document.getElementById('mobile-menu');
+            
+            // REMOVED: mobileMenuButton and mobileMenu variables as they are no longer needed for this structure
 
             function showTab(tabId) {
                 tabContents.forEach(content => {
@@ -184,34 +173,28 @@
                 if(linkToActivate) {
                     linkToActivate.classList.add('active');
                 }
-                
-                // IMPORTANT: Close mobile menu if open when a tab is selected
-                if (mobileMenu && !mobileMenu.classList.contains('hidden')) {
-                    mobileMenu.classList.add('hidden');
-                }
+                // REMOVED: Mobile menu close logic as there's no mobile menu to close
             }
             
             tabLinks.forEach(link => {
                 link.addEventListener('click', function (e) {
-                    e.preventDefault();
                     // This check is crucial for handling internal vs. external links
                     if (this.href && this.href.includes("pet-parents.scoutforpets.com")) {
                         window.open(this.href, '_blank');
-                        return; // Stop further execution for external link
-                    }
-                    const tabId = this.getAttribute('data-tab');
-                    if (tabId) { // Only show tab if data-tab attribute exists
+                    } else if (this.getAttribute('data-tab')) { // Only preventDefault if it's a data-tab link
+                        e.preventDefault(); 
+                        const tabId = this.getAttribute('data-tab');
                         showTab(tabId);
                     }
                 });
             });
 
-            // Toggle mobile menu visibility
-            if (mobileMenuButton) {
-                mobileMenuButton.addEventListener('click', function() {
-                    mobileMenu.classList.toggle('hidden');
-                });
-            }
+            // REMOVED: Toggle mobile menu visibility (hamburger button functionality)
+            // if (mobileMenuButton) {
+            //     mobileMenuButton.addEventListener('click', function() {
+            //         mobileMenu.classList.toggle('hidden');
+            //     });
+            // }
 
             // Show the initial tab (home)
             showTab('home-content');
