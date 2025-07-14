@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Leashed - Dog Walking & Pet Services</title>
+   <script src="https://cdn.tailwindcss.com"></script>
+   <link rel="preconnect" href="https://fonts.googleapis.com">
+   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+   <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;600&family=Nunito+Sans:wght@400;700&display=swap" rel="stylesheet">
+   <style>
+       /* Basic styles to apply custom fonts and colors */
+       html {
+           scroll-padding-top: 120px; /* Prevents sticky header from covering content */
+           scroll-behavior: smooth;
+       }
+       body {
+           font-family: 'Nunito Sans', sans-serif;
+           background-color: #F8FAFC; /* Light gray background */
+       }
+       h1, h2, h3 {
+           font-family: 'Lora', serif;
+       }
+       .tab-link.active {
+           color: #3B82F6; /* blue-500 */
+           border-bottom-color: #3B82F6; /* blue-500 */
+       }
+       .tab-content {
+           display: none;
+       }
+       .tab-content.active {
+           display: block;
+       }
+       /* A simple fade-in animation for tab content */
+       @keyframes fadeIn {
+           from { opacity: 0; transform: translateY(10px); }
+           to { opacity: 1; transform: translateY(0); }
+       }
+       .tab-content.active {
+           animation: fadeIn 0.5s ease-in-out;
+       }
+   </style>
+</head>
+<body class="bg-slate-50 text-slate-800">
+   <!-- Chosen Palette: Calm Blue & Slate Gray -->
+   <!-- Application Structure Plan: A single-page application (SPA) using a tabbed interface. This structure provides a fast, seamless user experience without page reloads. The "Home" tab serves as an engaging landing page with a clear call-to-action (CTA). The "Book Now" tab isolates the booking form, focusing the user on the task of conversion. The external "Client Login" link efficiently serves existing customers without cluttering the main app. This architecture is chosen for its clarity, speed, and user-centric flow. -->
+   <!-- Visualization & Content Choices: The application uses structured HTML and Tailwind CSS for all visual elements, including cards and layouts, ensuring a clean and responsive design without relying on graphics. The core interactive element is the tab navigation, powered by simple, efficient Vanilla JavaScript. The booking form is an embedded iframe for a seamless user experience, and the blog content is presented in scannable cards to encourage engagement. This approach prioritizes usability and modern web standards. -->
+   <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+
+
+   <!-- Header Section -->
+   <header class="bg-white/80 backdrop-blur-lg sticky top-0 z-50 border-b border-slate-200">
+       <div class="container mx-auto px-4">
+           <div class="flex justify-between items-center py-4">
+               <!-- Logo - Updated with provided image -->
+               <a href="#" class="flex items-center gap-3" data-tab="home-content">
+                   <img src="http://googleusercontent.com/file_content/1" alt="Leashed Logo" class="h-20 w-auto">
+               </a>
+               <!-- Navigation Tabs - Reordered -->
+               <nav class="hidden md:flex items-center space-x-8">
+                   <a href="#" class="tab-link text-lg font-semibold text-slate-600 hover:text-blue-500 border-b-2 border-transparent pb-1 transition-colors" data-tab="home-content">Home</a>
+                   <a href="#" class="tab-link text-lg font-semibold text-slate-600 hover:text-blue-500 border-b-2 border-transparent pb-1 transition-colors" data-tab="booking-content">Book Now</a>
+                   <a href="https://pet-parents.scoutforpets.com/" target="_blank" class="text-lg font-semibold text-slate-600 hover:text-blue-500 border-b-2 border-transparent pb-1 transition-colors">Client Login</a>
+                   <a href="#" class="tab-link text-lg font-semibold text-slate-600 hover:text-blue-500 border-b-2 border-transparent pb-1 transition-colors" data-tab="about-content">About</a>
+               </nav>
+               <!-- Mobile Menu Button (Optional, for future enhancement) -->
+               <div class="md:hidden">
+                   <a href="#" class="button bg-blue-500 text-white px-6 py-2 rounded-full" data-tab="booking-content">Book Now</a>
+               </div>
+           </div>
+       </div>
+   </header>
+
+
+   <!-- Main Content Area -->
+   <main>
+       <!-- Home Tab Content -->
+       <div id="home-content" class="tab-content">
+           <!-- Hero Section - Reverted background-size to 'cover' -->
+           <section class="relative h-[60vh] min-h-[400px] bg-cover bg-center bg-fixed flex items-center justify-center text-white" style="background-image: url('https://images.unsplash.com/photo-1552053831-71594a27632d?q=80&w=2162&auto=format&fit=crop');">
+               <div class="absolute inset-0 bg-black/50"></div>
+               <div class="relative text-center p-4">
+                   <h1 class="text-4xl md:text-6xl font-bold tracking-tight">Where Every Walk is an Adventure</h1>
+                   <p class="mt-4 text-lg md:text-xl max-w-2xl mx-auto">Reliable, insured, and loving dog walking services for your best friend. Peace of mind for you, tail wags for them.</p>
+                   <a href="#" class="button mt-8 inline-block bg-blue-500 hover:bg-blue-600 text-white text-lg font-bold py-3 px-8 rounded-full shadow-lg transition-transform hover:scale-105" data-tab="booking-content">Book a Meet & Greet</a>
+               </div>
+           </section>
+          
+           <!-- Blog Section - Increased top padding for more space -->
+           <section class="py-16 sm:py-24 pt-48">
+               <div class="container mx-auto px-4">
+                   <div class="text-center mb-12">
+                       <h2 class="text-3xl md:text-4xl font-bold">From the Blog</h2>
+                       <p class="mt-2 text-lg text-slate-600">Tips, tricks, and stories from our adventures.</p>
+                   </div>
+                   <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                       <!-- Blog Post 1 - Image removed -->
+                       <div class="bg-white rounded-xl shadow-md overflow-hidden flex flex-col transform hover:-translate-y-2 transition-transform duration-300">
+                           <div class="p-8">
+                               <h3 class="text-2xl font-bold mb-2">A Gourmet's Guide to the Food Bowl</h3>
+                               <p class="text-slate-600 my-4">Ever wonder what your dog is truly thinking when you plop down their dinner? This guide decodes the subtle nuances of kibble critique...</p>
+                               <a href="https://medium.com/@StayLeashed/a-gourmets-guide-to-the-food-bowl-db1403947366" target="_blank" class="font-semibold text-blue-500 hover:text-blue-600">Read Full Article &rarr;</a>
+                           </div>
+                       </div>
+                       <!-- Blog Post 2 - Image removed -->
+                       <div class="bg-white rounded-xl shadow-md overflow-hidden flex flex-col transform hover:-translate-y-2 transition-transform duration-300">
+                           <div class="p-8">
+                               <h3 class="text-2xl font-bold mb-2">The Four-Wheeled Oracle</h3>
+                               <p class="text-slate-600 my-4">A guide for the modern dog on interpreting the terrifyingly ambiguous omens of the car ride. Park or vet? The Oracle knows...</p>
+                               <a href="https://medium.com/@StayLeashed/the-four-wheeled-oracle-a-dogs-guide-to-interpreting-car-ride-omens-f3f8ae0fa356" target="_blank" class="font-semibold text-blue-500 hover:text-blue-600">Read Full Article &rarr;</a>
+                           </div>
+                       </div>
+                   </div>
+               </div>
+           </section>
+       </div>
+      
+       <!-- Booking Tab Content -->
+       <div id="booking-content" class="tab-content">
+           <section class="py-16 sm:py-24 pt-24"> <!-- Added pt-24 for consistent top spacing -->
+               <div class="container mx-auto px-4">
+                   <div class="text-center mb-12">
+                       <h2 class="text-3xl md:text-4xl font-bold">Book Your Meet & Greet</h2>
+                       <p class="mt-2 text-lg text-slate-600 max-w-2xl mx-auto">Let's get acquainted! Fill out the form below to schedule a complimentary meet & greet so we can ensure we're the perfect fit for you and your pup.</p>
+                   </div>
+                   <div class="max-w-3xl mx-auto bg-white p-2 rounded-xl shadow-lg">
+                       <!-- Increased iframe height to reduce internal scrolling -->
+                       <iframe src="https://docs.google.com/forms/d/e/1FAIpQLScThuqbb44LBJqpmMjS1P-AE3LbJMjUeGDvAoPe5OPnKfEPfA/viewform?embedded=true" width="100%" height="900" frameborder="0" marginheight="0" marginwidth="0">Loading...</iframe>
+                   </div>
+               </div>
+           </section>
+       </div>
+
+
+       <!-- About Tab Content - Moved to be the last section -->
+       <div id="about-content" class="tab-content">
+           <section class="py-16 sm:py-24 pt-24"> <!-- Added pt-24 for consistent top spacing -->
+               <div class="container mx-auto px-4">
+                   <div class="grid md:grid-cols-2 gap-12 items-center max-w-6xl mx-auto">
+                       <div class="text-left">
+                           <h2 class="text-3xl md:text-4xl font-bold mb-4">Our Commitment to Your Pet</h2>
+                           <p class="text-lg text-slate-600 mb-4">
+                               Hi, I’m Yvonne Jensen, the founder and lead walker at Leashed. My mission is simple: to provide a safe, reliable, and fun service that enriches the lives of the pets in my care.
+                           </p>
+                           <p class="text-lg text-slate-600">
+                               We want to give owners assurances. I treat every animal like they’re my own.
+                           </p>
+                       </div>
+                       <div>
+                           <img src="https://images.unsplash.com/photo-1529778873920-4da4926a72c2?q=80&w=1974&auto=format&fit=crop" alt="A close-up of a cute kitten with blue eyes" class="rounded-xl shadow-lg w-full h-auto object-cover">
+                       </div>
+                   </div>
+               </div>
+           </section>
+       </div>
+   </main>
+
+
+   <!-- Footer -->
+   <footer class="bg-white border-t border-slate-200 mt-12">
+       <div class="container mx-auto px-4 py-6 text-center text-slate-500">
+           <p>&copy; 2025 Leashed. All Rights Reserved.</p>
+       </div>
+   </footer>
+
+
+   <script>
+       document.addEventListener('DOMContentLoaded', function () {
+           const tabLinks = document.querySelectorAll('.tab-link, .button[data-tab], a[data-tab]');
+           const tabContents = document.querySelectorAll('.tab-content');
+
+
+           function showTab(tabId) {
+               // Hide all content
+               tabContents.forEach(content => {
+                   content.classList.remove('active');
+               });
+
+
+               // Deactivate all links
+               document.querySelectorAll('.tab-link').forEach(link => {
+                   link.classList.remove('active');
+               });
+
+
+               // Activate the correct content and link
+               const contentToShow = document.getElementById(tabId);
+               const linkToActivate = document.querySelector(`.tab-link[data-tab="${tabId}"]`);
+
+
+               if (contentToShow) {
+                   contentToShow.classList.add('active');
+               }
+               if(linkToActivate) {
+                   linkToActivate.classList.add('active');
+               }
+           }
+          
+           // Add click listeners
+           tabLinks.forEach(link => {
+               link.addEventListener('click', function (e) {
+                   e.preventDefault();
+                   const tabId = this.getAttribute('data-tab');
+                   showTab(tabId);
+               });
+           });
+
+
+           // Show the initial tab (home)
+           showTab('home-content');
+       });
+   </script>
+
+
+</body>
+</html>
+
+
+
+
