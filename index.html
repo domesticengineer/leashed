@@ -42,39 +42,42 @@
     </style>
 </head>
 <body class="bg-slate-50 text-slate-800">
-    <!-- Chosen Palette: Calm Blue & Slate Gray -->
-    <!-- Application Structure Plan: A single-page application (SPA) using a tabbed interface. This structure provides a fast, seamless user experience without page reloads. The "Home" tab serves as an engaging landing page with a clear call-to-action (CTA). The "Book Now" tab isolates the booking form, focusing the user on the task of conversion. The external "Client Login" link efficiently serves existing customers without cluttering the main app. This architecture is chosen for its clarity, speed, and user-centric flow. -->
-    <!-- Visualization & Content Choices: The application uses structured HTML and Tailwind CSS for all visual elements, including cards and layouts, ensuring a clean and responsive design without relying on graphics. The core interactive element is the tab navigation, powered by simple, efficient Vanilla JavaScript. The booking form is an embedded iframe for a seamless user experience, and the blog content is presented in scannable cards to encourage engagement. This approach prioritizes usability and modern web standards. -->
-    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
 
-    <!-- Header Section -->
     <header class="bg-white/80 backdrop-blur-lg sticky top-0 z-50 border-b border-slate-200">
         <div class="container mx-auto px-4">
             <div class="flex justify-between items-center py-4">
-                <!-- Logo text removed as per user request -->
                 <div class="flex items-center gap-3 text-2xl font-bold text-blue-600">
-                    <!-- Placeholder for potential future logo or simple brand name -->
-                </div>
-                <!-- Navigation Tabs - Reordered -->
+                    </div>
+
                 <nav class="hidden md:flex items-center space-x-8">
                     <a href="#" class="tab-link text-lg font-semibold text-slate-600 hover:text-blue-500 border-b-2 border-transparent pb-1 transition-colors" data-tab="home-content">Home</a>
                     <a href="#" class="tab-link text-lg font-semibold text-slate-600 hover:text-blue-500 border-b-2 border-transparent pb-1 transition-colors" data-tab="booking-content">Book Now</a>
                     <a href="https://pet-parents.scoutforpets.com/" target="_blank" class="text-lg font-semibold text-slate-600 hover:text-blue-500 border-b-2 border-transparent pb-1 transition-colors">Client Login</a>
                     <a href="#" class="tab-link text-lg font-semibold text-slate-600 hover:text-blue-500 border-b-2 border-transparent pb-1 transition-colors" data-tab="about-content">About</a>
                 </nav>
-                <!-- Mobile Menu Button (Optional, for future enhancement) -->
+
                 <div class="md:hidden">
-                    <a href="#" class="button bg-blue-500 text-white px-6 py-2 rounded-full" data-tab="booking-content">Book Now</a>
+                    <button id="mobile-menu-button" class="text-slate-600 focus:outline-none focus:ring-2 focus:ring-blue-500 p-2 rounded-md">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                        </svg>
+                    </button>
                 </div>
             </div>
         </div>
+
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-slate-200 py-4">
+            <nav class="flex flex-col items-center space-y-4 px-4">
+                <a href="#" class="tab-link text-lg font-semibold text-slate-600 hover:text-blue-500 py-2 w-full text-center" data-tab="home-content">Home</a>
+                <a href="#" class="tab-link text-lg font-semibold text-slate-600 hover:text-blue-500 py-2 w-full text-center" data-tab="booking-content">Book Now</a>
+                <a href="https://pet-parents.scoutforpets.com/" target="_blank" class="text-lg font-semibold text-slate-600 hover:text-blue-500 py-2 w-full text-center">Client Login</a>
+                <a href="#" class="tab-link text-lg font-semibold text-slate-600 hover:text-blue-500 py-2 w-full text-center" data-tab="about-content">About</a>
+            </nav>
+        </div>
     </header>
 
-    <!-- Main Content Area -->
     <main>
-        <!-- Home Tab Content -->
         <div id="home-content" class="tab-content">
-            <!-- Hero Section - Reverted background-size to 'cover' -->
             <section class="relative h-[60vh] min-h-[400px] bg-cover bg-center bg-fixed flex items-center justify-center text-white" style="background-image: url('https://images.unsplash.com/photo-1552053831-71594a27632d?q=80&w=2162&auto=format&fit=crop');">
                 <div class="absolute inset-0 bg-black/50"></div>
                 <div class="relative text-center p-4">
@@ -84,7 +87,6 @@
                 </div>
             </section>
             
-            <!-- Blog Section - Increased top padding for more space -->
             <section class="py-16 sm:py-24 pt-48"> 
                 <div class="container mx-auto px-4">
                     <div class="text-center mb-12">
@@ -92,7 +94,6 @@
                         <p class="mt-2 text-lg text-slate-600">Tips, tricks, and stories from our adventures.</p>
                     </div>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-                        <!-- Blog Post 1 - Image removed -->
                         <div class="bg-white rounded-xl shadow-md overflow-hidden flex flex-col transform hover:-translate-y-2 transition-transform duration-300">
                             <div class="p-8">
                                 <h3 class="text-2xl font-bold mb-2">A Gourmet's Guide to the Food Bowl</h3>
@@ -100,7 +101,6 @@
                                 <a href="https://medium.com/@StayLeashed/a-gourmets-guide-to-the-food-bowl-db1403947366" target="_blank" class="font-semibold text-blue-500 hover:text-blue-600">Read Full Article &rarr;</a>
                             </div>
                         </div>
-                        <!-- Blog Post 2 - Image removed -->
                         <div class="bg-white rounded-xl shadow-md overflow-hidden flex flex-col transform hover:-translate-y-2 transition-transform duration-300">
                             <div class="p-8">
                                 <h3 class="text-2xl font-bold mb-2">The Four-Wheeled Oracle</h3>
@@ -113,25 +113,22 @@
             </section>
         </div>
         
-        <!-- Booking Tab Content -->
         <div id="booking-content" class="tab-content">
-            <section class="py-16 sm:py-24 pt-24"> <!-- Added pt-24 for consistent top spacing -->
+            <section class="py-16 sm:py-24 pt-24">
                 <div class="container mx-auto px-4">
                     <div class="text-center mb-12">
                         <h2 class="text-3xl md:text-4xl font-bold">Book Your Meet & Greet</h2>
                         <p class="mt-2 text-lg text-slate-600 max-w-2xl mx-auto">Let's get acquainted! Fill out the form below to schedule a complimentary meet & greet so we can ensure we're the perfect fit for you and your pup.</p>
                     </div>
                     <div class="max-w-3xl mx-auto bg-white p-2 rounded-xl shadow-lg">
-                        <!-- Increased iframe height to reduce internal scrolling -->
                         <iframe src="https://docs.google.com/forms/d/e/1FAIpQLScThuqbb44LBJqpmMjS1P-AE3LbJMjUeGDvAoPe5OPnKfEPfA/viewform?embedded=true" width="100%" height="900" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
                     </div>
                 </div>
             </section>
         </div>
 
-        <!-- About Tab Content - Moved to be the last section -->
         <div id="about-content" class="tab-content">
-            <section class="py-16 sm:py-24 pt-24"> <!-- Added pt-24 for consistent top spacing -->
+            <section class="py-16 sm:py-24 pt-24">
                 <div class="container mx-auto px-4">
                     <div class="grid md:grid-cols-2 gap-12 items-center max-w-6xl mx-auto">
                         <div class="text-left">
@@ -152,7 +149,6 @@
         </div>
     </main>
 
-    <!-- Footer - Updated with contact information -->
     <footer class="bg-white border-t border-slate-200 mt-12">
         <div class="container mx-auto px-4 py-6 text-center text-slate-500">
             <p>&copy; 2025 Leashed. All Rights Reserved.</p>
@@ -166,21 +162,19 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            const tabLinks = document.querySelectorAll('.tab-link, .button[data-tab], a[data-tab]');
+            const tabLinks = document.querySelectorAll('.tab-link, .button[data-tab]'); // Exclude external link from tab-link selector
             const tabContents = document.querySelectorAll('.tab-content');
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
 
             function showTab(tabId) {
-                // Hide all content
                 tabContents.forEach(content => {
                     content.classList.remove('active');
                 });
-
-                // Deactivate all links
                 document.querySelectorAll('.tab-link').forEach(link => {
                     link.classList.remove('active');
                 });
 
-                // Activate the correct content and link
                 const contentToShow = document.getElementById(tabId);
                 const linkToActivate = document.querySelector(`.tab-link[data-tab="${tabId}"]`);
 
@@ -190,16 +184,34 @@
                 if(linkToActivate) {
                     linkToActivate.classList.add('active');
                 }
+                
+                // IMPORTANT: Close mobile menu if open when a tab is selected
+                if (mobileMenu && !mobileMenu.classList.contains('hidden')) {
+                    mobileMenu.classList.add('hidden');
+                }
             }
             
-            // Add click listeners
             tabLinks.forEach(link => {
                 link.addEventListener('click', function (e) {
                     e.preventDefault();
+                    // This check is crucial for handling internal vs. external links
+                    if (this.href && this.href.includes("pet-parents.scoutforpets.com")) {
+                        window.open(this.href, '_blank');
+                        return; // Stop further execution for external link
+                    }
                     const tabId = this.getAttribute('data-tab');
-                    showTab(tabId);
+                    if (tabId) { // Only show tab if data-tab attribute exists
+                        showTab(tabId);
+                    }
                 });
             });
+
+            // Toggle mobile menu visibility
+            if (mobileMenuButton) {
+                mobileMenuButton.addEventListener('click', function() {
+                    mobileMenu.classList.toggle('hidden');
+                });
+            }
 
             // Show the initial tab (home)
             showTab('home-content');
