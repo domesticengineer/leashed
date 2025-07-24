@@ -43,6 +43,7 @@
 </head>
 <body class="bg-slate-50 text-slate-800">
 
+    <!-- Header Section -->
     <header class="bg-white/80 backdrop-blur-lg sticky top-0 z-50 border-b border-slate-200">
         <div class="container mx-auto px-4">
             <div class="flex justify-between items-center py-4">
@@ -50,6 +51,7 @@
                     <span>Leashed</span>
                 </div>
 
+                <!-- Desktop Navigation -->
                 <nav class="hidden md:flex items-center space-x-8">
                     <a href="#" class="tab-link text-lg font-semibold text-slate-600 hover:text-blue-500 border-b-2 border-transparent pb-1 transition-colors" data-tab="home-content">Home</a>
                     <a href="#" class="tab-link text-lg font-semibold text-slate-600 hover:text-blue-500 border-b-2 border-transparent pb-1 transition-colors" data-tab="booking-content">Book Now</a>
@@ -57,6 +59,7 @@
                     <a href="#" class="tab-link text-lg font-semibold text-slate-600 hover:text-blue-500 border-b-2 border-transparent pb-1 transition-colors" data-tab="about-content">About</a>
                 </nav>
 
+                <!-- Mobile Navigation Buttons -->
                 <div class="flex items-center space-x-4 md:hidden">
                     <a href="#" class="button bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-full text-sm font-semibold transition-colors" data-tab="booking-content">Book Now</a>
                     <a href="https://app.leashed.com" target="_blank" class="button bg-slate-200 hover:bg-slate-300 text-slate-700 px-4 py-2 rounded-full text-sm font-semibold transition-colors">Leashed App</a>
@@ -67,7 +70,9 @@
     </header>
 
     <main>
+        <!-- Home Content Tab -->
         <div id="home-content" class="tab-content">
+            <!-- Hero Section -->
             <section class="relative h-[60vh] min-h-[400px] bg-cover bg-center bg-fixed flex items-center justify-center text-white" style="background-image: url('https://images.unsplash.com/photo-1552053831-71594a27632d?q=80&w=2162&auto=format&fit=crop');">
                 <div class="absolute inset-0 bg-black/50"></div>
                 <div class="relative text-center p-4">
@@ -77,7 +82,8 @@
                 </div>
             </section>
             
-            <section class="py-16 sm:py-24 pt-48"> 
+            <!-- Blog Section -->
+            <section class="py-16 sm:py-24"> 
                 <div class="container mx-auto px-4">
                     <div class="text-center mb-12">
                         <h2 class="text-3xl md:text-4xl font-bold">From the Blog</h2>
@@ -103,8 +109,9 @@
             </section>
         </div>
         
+        <!-- Booking Content Tab -->
         <div id="booking-content" class="tab-content">
-            <section class="py-16 sm:py-24 pt-24">
+            <section class="py-16 sm:py-24">
                 <div class="container mx-auto px-4">
                     <div class="text-center mb-12">
                         <h2 class="text-3xl md:text-4xl font-bold">Book Your Meet & Greet</h2>
@@ -117,9 +124,11 @@
             </section>
         </div>
 
+        <!-- About Content Tab -->
         <div id="about-content" class="tab-content">
-            <section class="py-16 sm:py-24 pt-24">
+            <section class="py-16 sm:py-24">
                 <div class="container mx-auto px-4">
+                    <!-- About the Founder Section -->
                     <div class="grid md:grid-cols-2 gap-12 items-center max-w-6xl mx-auto">
                         <div class="text-left">
                             <h2 class="text-3xl md:text-4xl font-bold mb-4">Our Commitment to Your Pet</h2>
@@ -133,21 +142,20 @@
                             </p>
                         </div>
                         <div>
-                            <img src="https://leashed.twic.pics/s3.image/Untitled.png" alt="Yvonne Jensen with a happy dog" class="rounded-xl shadow-lg w-full h-auto object-cover">
+                            <!-- FIXED: Replaced the placeholder with the user's S3 image URL -->
+                            <img src="https://adogsbusiness-images-leashedwebsite.s3.us-west-1.amazonaws.com/Untitled.png" alt="Yvonne Jensen with a happy dog" class="rounded-xl shadow-lg w-full h-auto object-cover">
                         </div>
                     </div>
 
+                    <!-- About the Team Section -->
                     <div class="grid md:grid-cols-2 gap-12 items-center max-w-6xl mx-auto mt-24 md:mt-32">
                         <div>
-                            <img src="https://images.unsplash.com/photo-1574717042571-c0667781b0a8?q=80&w=1935&auto=format&fit=crop" alt="A dog walker with a group of dogs">
+                            <img src="https://placehold.co/600x400/E2E8F0/475569?text=Our+Team" alt="A dog walker with a group of dogs" class="rounded-xl shadow-lg w-full h-auto object-cover">
                         </div>
                         <div class="text-left">
                             <h2 class="text-3xl md:text-4xl font-bold mb-4">Meet Our Valued Dog Walkers: </h2>
                             <p class="text-lg text-slate-600 mb-4">
                                 We're proud to partner with fellow animal lovers to extend our reliable and loving pet care services. They share our passion for animals and commitment to exceptional service. 
-                            </p>
-                            <p class="text-lg text-slate-600">
-                                
                             </p>
                         </div>
                     </div>
@@ -156,6 +164,7 @@
         </div>
     </main>
 
+    <!-- Footer Section -->
     <footer class="bg-white border-t border-slate-200 mt-12">
         <div class="container mx-auto px-4 py-6 text-center text-slate-500">
             <p>&copy; 2025 Leashed. All Rights Reserved.</p>
@@ -167,12 +176,14 @@
         </div>
     </footer>
 
+    <!-- JavaScript for Tab Functionality -->
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             const tabLinks = document.querySelectorAll('.tab-link, .button[data-tab]');  
             const tabContents = document.querySelectorAll('.tab-content');
             
             function showTab(tabId) {
+                // Hide all tab contents and remove active state from links
                 tabContents.forEach(content => {
                     content.classList.remove('active');
                 });
@@ -180,17 +191,21 @@
                     link.classList.remove('active');
                 });
 
+                // Get the specific tab content and link to activate
                 const contentToShow = document.getElementById(tabId);
                 const linkToActivate = document.querySelector(`.tab-link[data-tab="${tabId}"]`);
 
+                // Show the selected tab content
                 if (contentToShow) {
                     contentToShow.classList.add('active');
                 }
+                // Highlight the active navigation link
                 if(linkToActivate) {
                     linkToActivate.classList.add('active');
                 }
             }
             
+            // Add click event listeners to all tab links
             tabLinks.forEach(link => {
                 link.addEventListener('click', function (e) {
                     if (this.getAttribute('data-tab')) {
@@ -201,7 +216,7 @@
                 });
             });
 
-            // Show the initial tab (home)
+            // Show the initial tab (home) on page load
             showTab('home-content');
         });
     </script>
