@@ -53,16 +53,15 @@
                 <nav class="hidden md:flex items-center space-x-8">
                     <a href="#" class="tab-link text-lg font-semibold text-slate-600 hover:text-blue-500 border-b-2 border-transparent pb-1 transition-colors" data-tab="home-content">Home</a>
                     <a href="#" class="tab-link text-lg font-semibold text-slate-600 hover:text-blue-500 border-b-2 border-transparent pb-1 transition-colors" data-tab="booking-content">Book Now</a>
-                    <a href="https://pet-parents.scoutforpets.com/" target="_blank" class="text-lg font-semibold text-slate-600 hover:text-blue-500 border-b-2 border-transparent pb-1 transition-colors">Client Login</a>
+                    <a href="https://app.leashed.com" target="_blank" class="text-lg font-semibold text-slate-600 hover:text-blue-500 border-b-2 border-transparent pb-1 transition-colors">Leashed App</a>
                     <a href="#" class="tab-link text-lg font-semibold text-slate-600 hover:text-blue-500 border-b-2 border-transparent pb-1 transition-colors" data-tab="about-content">About</a>
                 </nav>
 
                 <div class="flex items-center space-x-4 md:hidden">
                     <a href="#" class="button bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-full text-sm font-semibold transition-colors" data-tab="booking-content">Book Now</a>
-                    <a href="https://pet-parents.scoutforpets.com/" target="_blank" class="button bg-slate-200 hover:bg-slate-300 text-slate-700 px-4 py-2 rounded-full text-sm font-semibold transition-colors">Client Login</a>
+                    <a href="https://app.leashed.com" target="_blank" class="button bg-slate-200 hover:bg-slate-300 text-slate-700 px-4 py-2 rounded-full text-sm font-semibold transition-colors">Leashed App</a>
                     <a href="#" class="button bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-full text-sm font-semibold transition-colors" data-tab="about-content">About Us</a>
-                    </div>
-                
+                </div>
             </div>
         </div>
     </header>
@@ -125,34 +124,34 @@
                         <div class="text-left">
                             <h2 class="text-3xl md:text-4xl font-bold mb-4">Our Commitment to Your Pet</h2>
                             <p class="text-lg text-slate-600 mb-4">
-                                Hi, I’m Yvonne Jensen, the founder and lead walker at Leashed. My mission is simple: to provide a safe, reliable, and fun service that enriches the lives of the pets in my care.
+                                Hi, I’m Yvonne Jensen, the founder and lead walker at Leashed. My mission is simple: to provide a safe, reliable, and fun service that enriches the lives of the pets in my care. 
                             </p>
                             <p class="text-lg text-slate-600">
-                                We want to give owners assurances. Every animal is treated like they are our own. 
-                                I am a Certified Nurse Assistant, First Aid Certified, and a Cardiac Tech. 
-                                I bring the same level of compassion and care that I offer my patients to your animals.
+                                We want to give owners assurances. Every animal is treated like they are our own.  
+                                I am a Certified Nurse Assistant, First Aid Certified, and a Cardiac Tech.  
+                                I bring the same level of compassion and care that I offer my patients to your animals. 
                             </p>
                         </div>
                         <div>
-                            <img src="https://i.postimg.cc/zVZW8L97/IMG-20250624-085657111-2.jpg" alt="Yvonne Jensen with a happy dog" class="rounded-xl shadow-lg w-full h-auto object-cover">
-                            </div>
+                            <img src="https://leashed.twic.pics/s3.image/Untitled.png" alt="Yvonne Jensen with a happy dog" class="rounded-xl shadow-lg w-full h-auto object-cover">
+                        </div>
                     </div>
 
                     <div class="grid md:grid-cols-2 gap-12 items-center max-w-6xl mx-auto mt-24 md:mt-32">
                         <div>
-                            <img src="https://images.unsplash.com/photo-1574717042571-c0667781b0a8?q=80&w=1935&auto=format&fit=crop">
+                            <img src="https://images.unsplash.com/photo-1574717042571-c0667781b0a8?q=80&w=1935&auto=format&fit=crop" alt="A dog walker with a group of dogs">
                         </div>
                         <div class="text-left">
                             <h2 class="text-3xl md:text-4xl font-bold mb-4">Meet Our Valued Dog Walkers: </h2>
                             <p class="text-lg text-slate-600 mb-4">
-                                We're proud to partner with fellow animal lovers to extend our reliable and loving pet care services. They share our passion for animals and commitment to exceptional service.
+                                We're proud to partner with fellow animal lovers to extend our reliable and loving pet care services. They share our passion for animals and commitment to exceptional service. 
                             </p>
                             <p class="text-lg text-slate-600">
                                 
                             </p>
                         </div>
                     </div>
-                    </div>
+                </div>
             </section>
         </div>
     </main>
@@ -170,7 +169,7 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            const tabLinks = document.querySelectorAll('.tab-link, .button[data-tab]'); 
+            const tabLinks = document.querySelectorAll('.tab-link, .button[data-tab]');  
             const tabContents = document.querySelectorAll('.tab-content');
             
             function showTab(tabId) {
@@ -194,11 +193,8 @@
             
             tabLinks.forEach(link => {
                 link.addEventListener('click', function (e) {
-                    // This check is crucial for handling internal vs. external links
-                    if (this.href && this.href.includes("pet-parents.scoutforpets.com")) {
-                        window.open(this.href, '_blank');
-                    } else if (this.getAttribute('data-tab')) { // Only preventDefault if it's a data-tab link
-                        e.preventDefault(); 
+                    if (this.getAttribute('data-tab')) {
+                        e.preventDefault();  
                         const tabId = this.getAttribute('data-tab');
                         showTab(tabId);
                     }
