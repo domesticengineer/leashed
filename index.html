@@ -1,225 +1,259 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Leashed - Dog Walking & Pet Services</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;600&family=Nunito+Sans:wght@400;700&display=swap" rel="stylesheet">
-    <style>
-        /* Basic styles to apply custom fonts and colors */
-        html {
-            scroll-padding-top: 120px; /* Prevents sticky header from covering content */
-            scroll-behavior: smooth;
-        }
-        body {
-            font-family: 'Nunito Sans', sans-serif;
-            background-color: #F8FAFC; /* Light gray background */
-        }
-        h1, h2, h3 {
-            font-family: 'Lora', serif;
-        }
-        .tab-link.active {
-            color: #3B82F6; /* blue-500 */
-            border-bottom-color: #3B82F6; /* blue-500 */
-        }
-        .tab-content {
-            display: none;
-        }
-        .tab-content.active {
-            display: block;
-        }
-        /* A simple fade-in animation for tab content */
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        .tab-content.active {
-            animation: fadeIn 0.5s ease-in-out;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Leashed - Dog Walking & Pet Services</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;600&family=Nunito+Sans:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    html { scroll-padding-top: 120px; scroll-behavior: smooth; }
+    body { font-family: 'Nunito Sans', sans-serif; background-color: #F8FAFC; }
+    h1, h2, h3 { font-family: 'Lora', serif; }
+    .tab-link.active { color: #3B82F6; border-bottom-color: #3B82F6; }
+    .tab-content { display: none; }
+    .tab-content.active { display: block; animation: fadeIn 0.5s ease-in-out; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+  </style>
 </head>
 <body class="bg-slate-50 text-slate-800">
-
-    <!-- Header Section -->
-    <header class="bg-white/80 backdrop-blur-lg sticky top-0 z-50 border-b border-slate-200">
+  <header class="bg-white/80 backdrop-blur-lg sticky top-0 z-50 border-b border-slate-200">
+    <div class="container mx-auto px-4">
+      <div class="flex justify-between items-center py-4">
+        <a href="#" class="tab-link" data-tab="home-content">
+          <img src="https://adogsbusiness-images-leashedwebsite.s3.us-west-1.amazonaws.com/leashed-logo.png" alt="Leashed Logo" class="h-24 w-auto">
+        </a>
+        <nav class="hidden md:flex items-center space-x-8">
+          <a href="#" class="tab-link text-lg font-semibold text-slate-600 hover:text-blue-500 border-b-2 border-transparent pb-1 transition-colors" data-tab="home-content">Home</a>
+          <a href="#" class="tab-link text-lg font-semibold text-slate-600 hover:text-blue-500 border-b-2 border-transparent pb-1 transition-colors" data-tab="booking-content">Book Now</a>
+          <a href="https://app.leashed.com" target="_blank" class="text-lg font-semibold text-slate-600 hover:text-blue-500 border-b-2 border-transparent pb-1 transition-colors">Leashed App</a>
+          <a href="#" class="tab-link text-lg font-semibold text-slate-600 hover:text-blue-500 border-b-2 border-transparent pb-1 transition-colors" data-tab="about-content">About</a>
+        </nav>
+        <div class="flex items-center space-x-4 md:hidden">
+          <a href="#" class="button bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-full text-sm font-semibold transition-colors" data-tab="booking-content">Book Now</a>
+          <a href="https://app.leashed.com" target="_blank" class="button bg-slate-200 hover:bg-slate-300 text-slate-700 px-4 py-2 rounded-full text-sm font-semibold transition-colors">Leashed App</a>
+          <a href="#" class="button bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-full text-sm font-semibold transition-colors" data-tab="about-content">About Us</a>
+        </div>
+      </div>
+    </div>
+  </header>
+  <main>
+    <div id="home-content" class="tab-content">
+      <section class="relative h-[60vh] min-h-[400px] bg-cover bg-center bg-fixed flex items-center justify-center text-white" style="background-image: url('https://images.unsplash.com/photo-1552053831-71594a27632d?q=80&w=2162&auto=format&fit=crop');">
+        <div class="absolute inset-0 bg-black/50"></div>
+        <div class="relative text-center p-4">
+          <h1 class="text-4xl md:text-6xl font-bold tracking-tight">Where Every Walk is an Adventure</h1>
+          <p class="mt-4 text-lg md:text-xl max-w-2xl mx-auto">Reliable, insured, and loving dog walking services for your best friend. Peace of mind for you, tail wags for them.</p>
+          <a href="#" class="button mt-8 inline-block bg-blue-500 hover:bg-blue-600 text-white text-lg font-bold py-3 px-8 rounded-full shadow-lg transition-transform hover:scale-105" data-tab="booking-content">Book a Meet & Greet</a>
+        </div>
+      </section>
+      <section class="py-16 sm:py-24">
         <div class="container mx-auto px-4">
-            <div class="flex justify-between items-center py-4">
-                <a href="#" class="tab-link" data-tab="home-content">
-                    <img src="https://adogsbusiness-images-leashedwebsite.s3.us-west-1.amazonaws.com/leashed-logo.png" alt="Leashed Logo" class="h-24 w-auto">
-                </a>
-
-                <!-- Desktop Navigation -->
-                <nav class="hidden md:flex items-center space-x-8">
-                    <a href="#" class="tab-link text-lg font-semibold text-slate-600 hover:text-blue-500 border-b-2 border-transparent pb-1 transition-colors" data-tab="home-content">Home</a>
-                    <a href="#" class="tab-link text-lg font-semibold text-slate-600 hover:text-blue-500 border-b-2 border-transparent pb-1 transition-colors" data-tab="booking-content">Book Now</a>
-                    <a href="https://app.leashed.com" target="_blank" class="text-lg font-semibold text-slate-600 hover:text-blue-500 border-b-2 border-transparent pb-1 transition-colors">Leashed App</a>
-                    <a href="#" class="tab-link text-lg font-semibold text-slate-600 hover:text-blue-500 border-b-2 border-transparent pb-1 transition-colors" data-tab="about-content">About</a>
-                </nav>
-
-                <!-- Mobile Navigation Buttons -->
-                <div class="flex items-center space-x-4 md:hidden">
-                    <a href="#" class="button bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-full text-sm font-semibold transition-colors" data-tab="booking-content">Book Now</a>
-                    <a href="https://app.leashed.com" target="_blank" class="button bg-slate-200 hover:bg-slate-300 text-slate-700 px-4 py-2 rounded-full text-sm font-semibold transition-colors">Leashed App</a>
-                    <a href="#" class="button bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-full text-sm font-semibold transition-colors" data-tab="about-content">About Us</a>
-                </div>
+          <div class="text-center mb-12">
+            <h2 class="text-3xl md:text-4xl font-bold">From the Blog</h2>
+            <p class="mt-2 text-lg text-slate-600">Tips, tricks, and stories from our adventures.</p>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+            <div class="bg-white rounded-xl shadow-md overflow-hidden flex flex-col transform hover:-translate-y-2 transition-transform duration-300">
+              <div class="p-8">
+                <h3 class="text-2xl font-bold mb-2">A Gourmet's Guide to the Food Bowl</h3>
+                <p class="text-slate-600 my-4">Ever wonder what your dog is truly thinking when you plop down their dinner? This guide decodes the subtle nuances of kibble critique...</p>
+                <a href="https://medium.com/@StayLeashed/a-gourmets-guide-to-the-food-bowl-db1403947366" target="_blank" class="font-semibold text-blue-500 hover:text-blue-600">Read Full Article →</a>
+              </div>
             </div>
-        </div>
-    </header>
-
-    <main>
-        <!-- Home Content Tab -->
-        <div id="home-content" class="tab-content">
-            <!-- Hero Section -->
-            <section class="relative h-[60vh] min-h-[400px] bg-cover bg-center bg-fixed flex items-center justify-center text-white" style="background-image: url('https://images.unsplash.com/photo-1552053831-71594a27632d?q=80&w=2162&auto=format&fit=crop');">
-                <div class="absolute inset-0 bg-black/50"></div>
-                <div class="relative text-center p-4">
-                    <h1 class="text-4xl md:text-6xl font-bold tracking-tight">Where Every Walk is an Adventure</h1>
-                    <p class="mt-4 text-lg md:text-xl max-w-2xl mx-auto">Reliable, insured, and loving dog walking services for your best friend. Peace of mind for you, tail wags for them.</p>
-                    <a href="#" class="button mt-8 inline-block bg-blue-500 hover:bg-blue-600 text-white text-lg font-bold py-3 px-8 rounded-full shadow-lg transition-transform hover:scale-105" data-tab="booking-content">Book a Meet & Greet</a>
-                </div>
-            </section>
-            
-            <!-- Blog Section -->
-            <section class="py-16 sm:py-24"> 
-                <div class="container mx-auto px-4">
-                    <div class="text-center mb-12">
-                        <h2 class="text-3xl md:text-4xl font-bold">From the Blog</h2>
-                        <p class="mt-2 text-lg text-slate-600">Tips, tricks, and stories from our adventures.</p>
-                    </div>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-                        <div class="bg-white rounded-xl shadow-md overflow-hidden flex flex-col transform hover:-translate-y-2 transition-transform duration-300">
-                            <div class="p-8">
-                                <h3 class="text-2xl font-bold mb-2">A Gourmet's Guide to the Food Bowl</h3>
-                                <p class="text-slate-600 my-4">Ever wonder what your dog is truly thinking when you plop down their dinner? This guide decodes the subtle nuances of kibble critique...</p>
-                                <a href="https://medium.com/@StayLeashed/a-gourmets-guide-to-the-food-bowl-db1403947366" target="_blank" class="font-semibold text-blue-500 hover:text-blue-600">Read Full Article &rarr;</a>
-                            </div>
-                        </div>
-                        <div class="bg-white rounded-xl shadow-md overflow-hidden flex flex-col transform hover:-translate-y-2 transition-transform duration-300">
-                            <div class="p-8">
-                                <h3 class="text-2xl font-bold mb-2">The Four-Wheeled Oracle</h3>
-                                <p class="text-slate-600 my-4">A guide for the modern dog on interpreting the terrifyingly ambiguous omens of the car ride. Park or vet? The Oracle knows...</p>
-                                <a href="https://medium.com/@StayLeashed/the-four-wheeled-oracle-a-dogs-guide-to-interpreting-car-ride-omens-f3f8ae0fa356" target="_blank" class="font-semibold text-blue-500 hover:text-blue-600">Read Full Article &rarr;</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-        </div>
-        
-        <!-- Booking Content Tab -->
-        <div id="booking-content" class="tab-content">
-            <section class="py-16 sm:py-24">
-                <div class="container mx-auto px-4">
-                    <div class="text-center mb-12">
-                        <h2 class="text-3xl md:text-4xl font-bold">Book Your Meet & Greet</h2>
-                        <p class="mt-2 text-lg text-slate-600 max-w-2xl mx-auto">Let's get acquainted! Fill out the form below to schedule a complimentary meet & greet so we can ensure we're the perfect fit for you and your pup.</p>
-                    </div>
-                    <div class="max-w-3xl mx-auto bg-white p-2 rounded-xl shadow-lg">
-                        <iframe src="https://docs.google.com/forms/d/e/1FAIpQLScThuqbb44LBJqpmMjS1P-AE3LbJMjUeGDvAoPe5OPnKfEPfA/viewform?embedded=true" width="100%" height="900" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
-                    </div>
-                </div>
-            </section>
-        </div>
-
-        <!-- About Content Tab -->
-        <div id="about-content" class="tab-content">
-            <section class="py-16 sm:py-24">
-                <div class="container mx-auto px-4">
-                    <!-- About the Founder Section -->
-                    <div class="grid md:grid-cols-2 gap-12 items-center max-w-6xl mx-auto">
-                        <div class="text-left">
-                            <h2 class="text-3xl md:text-4xl font-bold mb-4">Our Commitment to Your Pet</h2>
-                            <p class="text-lg text-slate-600 mb-4">
-                                Hi, I’m Yvonne Jensen, the founder and lead walker at Leashed. My mission is simple: to provide a safe, reliable, and fun service that enriches the lives of the pets in my care. 
-                            </p>
-                            <p class="text-lg text-slate-600">
-                                We want to give owners assurances. Every animal is treated like they are our own.  
-                                I am a Certified Nurse Assistant, First Aid Certified, and a Cardiac Tech.  
-                                I bring the same level of compassion and care that I offer my patients to your animals. 
-                            </p>
-                        </div>
-                        <div>
-                            <img src="https://adogsbusiness-images-leashedwebsite.s3.us-west-1.amazonaws.com/Untitled.png" alt="Yvonne Jensen with a happy dog" class="rounded-xl shadow-lg w-full h-auto object-cover">
-                        </div>
-                    </div>
-
-                    <!-- About the Team Section -->
-                    <div class="grid md:grid-cols-2 gap-12 items-center max-w-6xl mx-auto mt-24 md:mt-32">
-                        <div>
-                            <!-- FIXED: Updated placeholder image -->
-                            <img src="https://images.unsplash.com/photo-1529472119196-cb724127a98e?q=80&w=1974&auto=format&fit=crop" alt="A dog walker with a group of dogs" class="rounded-xl shadow-lg w-full h-auto object-cover">
-                        </div>
-                        <div class="text-left">
-                            <h2 class="text-3xl md:text-4xl font-bold mb-4">Meet Our Valued Dog Walkers: </h2>
-                            <p class="text-lg text-slate-600 mb-4">
-                                We're proud to partner with fellow animal lovers to extend our reliable and loving pet care services. They share our passion for animals and commitment to exceptional service. 
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </section>
-        </div>
-    </main>
-
-    <!-- Footer Section -->
-    <footer class="bg-white border-t border-slate-200 mt-12">
-        <div class="container mx-auto px-4 py-6 text-center text-slate-500">
-            <p>&copy; 2025 Leashed. All Rights Reserved.</p>
-            <div class="mt-4 text-slate-600">
-                <p>Questions? Reach out to us!</p>
-                <p>Call or Text: <a href="tel:+14153648597" class="text-blue-500 hover:underline">(415) 364-8597</a></p>
-                <p>Email: <a href="mailto:PupDates@stayleashed.com" class="text-blue-500 hover:underline">PupDates@stayleashed.com</a></p>
+            <div class="bg-white rounded-xl shadow-md overflow-hidden flex flex-col transform hover:-translate-y-2 transition-transform duration-300">
+              <div class="p-8">
+                <h3 class="text-2xl font-bold mb-2">The Four-Wheeled Oracle</h3>
+                <p class="text-slate-600 my-4">A guide for the modern dog on interpreting the terrifyingly ambiguous omens of the car ride. Park or vet? The Oracle knows...</p>
+                <a href="https://medium.com/@StayLeashed/the-four-wheeled-oracle-a-dogs-guide-to-interpreting-car-ride-omens-f3f8ae0fa356" target="_blank" class="font-semibold text-blue-500 hover:text-blue-600">Read Full Article →</a>
+              </div>
             </div>
+          </div>
         </div>
-    </footer>
+      </section>
+    </div>
+    <div id="booking-content" class="tab-content">
+      <section class="py-16 sm:py-24">
+        <div class="container mx-auto px-4">
+          <div class="text-center mb-12">
+            <h2 class="text-3xl md:text-4xl font-bold">Book Your Meet & Greet</h2>
+            <p class="mt-2 text-lg text-slate-600 max-w-2xl mx-auto">Let's get acquainted! Fill out the form below to schedule a complimentary meet & greet so we can ensure we're the perfect fit for you and your pup.</p>
+          </div>
+          <div class="max-w-3xl mx-auto bg-white p-2 rounded-xl shadow-lg">
+            <iframe src="https://docs.google.com/forms/d/e/1FAIpQLScThuqbb44LBJqpmMjS1P-AE3LbJMjUeGDvAoPe5OPnKfEPfA/viewform?embedded=true" width="100%" height="900" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
+          </div>
+        </div>
+      </section>
+    </div>
+    <div id="about-content" class="tab-content">
+      <section class="py-16 sm:py-24">
+        <div class="container mx-auto px-4">
+          <div class="grid md:grid-cols-2 gap-12 items-center max-w-6xl mx-auto">
+            <div class="text-left">
+              <h2 class="text-3xl md:text-4xl font-bold mb-4">Our Commitment to Your Pet</h2>
+              <p class="text-lg text-slate-600 mb-4">
+                Hi, I’m Yvonne Jensen, the founder and lead walker at Leashed. My mission is simple: to provide a safe, reliable, and fun service that enriches the lives of the pets in my care.
+              </p>
+              <p class="text-lg text-slate-600">
+                We want to give owners assurances. Every animal is treated like they are our own.
+                I am a Certified Nurse Assistant, First Aid Certified, and a Cardiac Tech.
+                I bring the same level of compassion and care that I offer my patients to your animals.
+              </p>
+            </div>
+            <div>
+              <img src="https://adogsbusiness-images-leashedwebsite.s3.us-west-1.amazonaws.com/Untitled.png" alt="Yvonne Jensen with a happy dog" class="rounded-xl shadow-lg w-full h-auto object-cover">
+            </div>
+          </div>
+          <div class="grid md:grid-cols-2 gap-12 items-center max-w-6xl mx-auto mt-24 md:mt-32">
+            <div>
+              <img src="https://images.unsplash.com/photo-1529472119196-cb724127a98e?q=80&w=1974&auto=format&fit=crop" alt="A dog walker with a group of dogs" class="rounded-xl shadow-lg w-full h-auto object-cover">
+            </div>
+            <div class="text-left">
+              <h2 class="text-3xl md:text-4xl font-bold mb-4">Meet Our Valued Dog Walkers</h2>
+              <p class="text-lg text-slate-600 mb-4">
+                We're proud to partner with fellow animal lovers to extend our reliable and loving pet care services. They share our passion for animals and commitment to exceptional service.
+              </p>
+              <h3 class="text-xl font-semibold mb-2">Available Times</h3>
+              <div id="public-calendar" class="max-h-[200px] overflow-auto"></div>
+              <h3 class="text-xl font-semibold mt-4 mb-2">Request a Service</h3>
+              <div class="space-y-4">
+                <div>
+                  <label for="public-service-type" class="block text-slate-600">Service Type</label>
+                  <select id="public-service-type" class="w-full p-2 border border-slate-300 rounded-md">
+                    <option value="20 Minute Walk">20 Minute Walk</option>
+                    <option value="30 Minute Walk">30 Minute Walk</option>
+                    <option value="60 Minute Walk">60 Minute Walk</option>
+                    <option value="Pet Sitting">Pet Sitting</option>
+                    <option value="Overnight Boarding">Overnight Boarding</option>
+                  </select>
+                </div>
+                <div>
+                  <label for="public-date" class="block text-slate-600">Preferred Date</label>
+                  <input id="public-date" type="date" min="2025-07-26" class="w-full p-2 border border-slate-300 rounded-md">
+                </div>
+                <div>
+                  <label for="public-time" class="block text-slate-600">Preferred Time</label>
+                  <input id="public-time" type="time" class="w-full p-2 border border-slate-300 rounded-md">
+                </div>
+                <button class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600" onclick="submitPublicRequest()">Submit Request</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+  <footer class="bg-white border-t border-slate-200 mt-12">
+    <div class="container mx-auto px-4 py-6 text-center text-slate-500">
+      <p>© 2025 Leashed. All Rights Reserved.</p>
+      <div class="mt-4 text-slate-600">
+        <p>Questions? Reach out to us!</p>
+        <p>Call or Text: <a href="tel:+14153648597" class="text-blue-500 hover:underline">(415) 364-8597</a></p>
+        <p>Email: <a href="mailto:PupDates@stayleashed.com" class="text-blue-500 hover:underline">PupDates@stayleashed.com</a></p>
+      </div>
+    </div>
+  </footer>
+  <script>
+    const CALENDAR_DATA_URL = 'https://domesticengineer.github.io/Leashed_App_Pro/calendar-data.json';
+    let calendarData = { events: [] };
 
-    <!-- JavaScript for Tab Functionality -->
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const tabLinks = document.querySelectorAll('.tab-link, .button[data-tab]');  
-            const tabContents = document.querySelectorAll('.tab-content');
-            
-            function showTab(tabId) {
-                // Hide all tab contents and remove active state from links
-                tabContents.forEach(content => {
-                    content.classList.remove('active');
-                });
-                document.querySelectorAll('.tab-link').forEach(link => {
-                    link.classList.remove('active');
-                });
-
-                // Get the specific tab content and link to activate
-                const contentToShow = document.getElementById(tabId);
-                const linkToActivate = document.querySelector(`.tab-link[data-tab="${tabId}"]`);
-
-                // Show the selected tab content
-                if (contentToShow) {
-                    contentToShow.classList.add('active');
-                }
-                // Highlight the active navigation link
-                if(linkToActivate) {
-                    linkToActivate.classList.add('active');
-                }
-            }
-            
-            // Add click event listeners to all tab links
-            tabLinks.forEach(link => {
-                link.addEventListener('click', function (e) {
-                    if (this.getAttribute('data-tab')) {
-                        e.preventDefault();  
-                        const tabId = this.getAttribute('data-tab');
-                        showTab(tabId);
-                    }
-                });
-            });
-
-            // Show the initial tab (home) on page load
-            showTab('home-content');
+    function loadCalendarData() {
+      fetch(CALENDAR_DATA_URL)
+        .then(response => response.json())
+        .then(data => {
+          calendarData = data;
+          const localEvents = JSON.parse(localStorage.getItem('calendarEvents') || '[]');
+          calendarData.events = [...calendarData.events, ...localEvents];
+          renderPublicCalendar();
+        })
+        .catch(() => {
+          calendarData.events = JSON.parse(localStorage.getItem('calendarEvents') || '[]');
+          renderPublicCalendar();
         });
-    </script>
+    }
 
+    function saveLocalEvent(event) {
+      const localEvents = JSON.parse(localStorage.getItem('calendarEvents') || '[]');
+      localEvents.push(event);
+      localStorage.setItem('calendarEvents', JSON.stringify(localEvents));
+      console.log(`Reminder trigger: Booking request ${event.id} for ${event.start}`);
+      // Replace with your Zapier webhook URL
+      fetch('YOUR_ZAPIER_WEBHOOK_URL', {
+        method: 'POST',
+        body: JSON.stringify(event)
+      }).catch(err => console.error('Webhook failed:', err));
+    }
+
+    function renderPublicCalendar() {
+      const calendarEl = document.getElementById('public-calendar');
+      const calendar = new FullCalendar.Calendar(calendarEl, {
+        initialView: 'timeGridWeek',
+        events: calendarData.events.filter(e => e.public && e.status === 'available'),
+        eventColor: '#3b82f6',
+        headerToolbar: { left: 'prev,next', center: 'title', right: 'timeGridWeek,dayGridMonth' },
+        slotMinTime: '08:00:00',
+        slotMaxTime: '20:00:00',
+        height: '200px'
+      });
+      calendar.render();
+    }
+
+    function submitPublicRequest() {
+      const serviceType = document.getElementById('public-service-type').value;
+      const date = document.getElementById('public-date').value;
+      const time = document.getElementById('public-time').value;
+      if (!date || !time) {
+        alert('Please select a date and time');
+        return;
+      }
+      const start = `${date}T${time}:00`;
+      const end = new Date(start);
+      end.setHours(end.getHours() + 1);
+      const event = {
+        id: `event${Date.now()}`,
+        title: `Requested: ${serviceType}`,
+        start,
+        end: end.toISOString(),
+        advocateId: null,
+        clientId: 'public',
+        status: 'pending',
+        public: false,
+      };
+      saveLocalEvent(event);
+      alert('Service request submitted! Awaiting confirmation.');
+      document.getElementById('public-service-type').value = '20 Minute Walk';
+      document.getElementById('public-date').value = '';
+      document.getElementById('public-time').value = '';
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+      const tabLinks = document.querySelectorAll('.tab-link, .button[data-tab]');
+      const tabContents = document.querySelectorAll('.tab-content');
+
+      function showTab(tabId) {
+        tabContents.forEach(content => content.classList.remove('active'));
+        document.querySelectorAll('.tab-link').forEach(link => link.classList.remove('active'));
+        const contentToShow = document.getElementById(tabId);
+        const linkToActivate = document.querySelector(`.tab-link[data-tab="${tabId}"]`);
+        if (contentToShow) contentToShow.classList.add('active');
+        if (linkToActivate) linkToActivate.classList.add('active');
+      }
+
+      tabLinks.forEach(link => {
+        link.addEventListener('click', function (e) {
+          if (this.getAttribute('data-tab')) {
+            e.preventDefault();
+            showTab(this.getAttribute('data-tab'));
+          }
+        });
+      });
+
+      showTab('home-content');
+      loadCalendarData();
+    });
+  </script>
 </body>
 </html>
