@@ -28,12 +28,12 @@
         </a>
         <nav class="hidden md:flex items-center space-x-8">
           <a href="#" class="tab-link text-lg font-semibold text-slate-600 hover:text-blue-500 border-b-2 border-transparent pb-1 transition-colors" data-tab="home-content">Home</a>
-          <a href="#" class="tab-link text-lg font-semibold text-slate-600 hover:text-blue-500 border-b-2 border-transparent pb-1 transition-colors" data-tab="about-content">Schedule Consult</a>
+          <a href="#" class="tab-link text-lg font-semibold text-slate-600 hover:text-blue-500 border-b-2 border-transparent pb-1 transition-colors" data-tab="booking-content">Schedule Consult</a>
           <a href="https://app.leashed.com" target="_blank" class="text-lg font-semibold text-slate-600 hover:text-blue-500 border-b-2 border-transparent pb-1 transition-colors">Leashed App</a>
           <a href="#" class="tab-link text-lg font-semibold text-slate-600 hover:text-blue-500 border-b-2 border-transparent pb-1 transition-colors" data-tab="about-content">About</a>
         </nav>
         <div class="flex items-center space-x-4 md:hidden">
-          <a href="#" class="button bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-full text-sm font-semibold transition-colors" data-tab="about-content">Schedule Consult</a>
+          <a href="#" class="button bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-full text-sm font-semibold transition-colors" data-tab="booking-content">Schedule Consult</a>
           <a href="https://app.leashed.com" target="_blank" class="button bg-slate-200 hover:bg-slate-300 text-slate-700 px-4 py-2 rounded-full text-sm font-semibold transition-colors">Leashed App</a>
           <a href="#" class="button bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-full text-sm font-semibold transition-colors" data-tab="about-content">About Us</a>
         </div>
@@ -131,6 +131,18 @@
                   </select>
                 </div>
                 <div>
+                  <label for="public-name" class="block text-slate-600">Your Name</label>
+                  <input id="public-name" type="text" class="w-full p-2 border border-slate-300 rounded-md">
+                </div>
+                <div>
+                  <label for="publicolja-email" class="block text-slate-600">Your Email</label>
+                  <input id="public-email" type="email" class="w-full p-2 border border-slate-300 rounded-md">
+                </div>
+                <div>
+                  <label for="public-phone" class="block text-slate-600">Your Phone Number</label>
+                  <input id="public-phone" type="tel" class="w-full p-2 border border-slate-300 rounded-md">
+                </div>
+                <div>
                   <label for="public-date" class="block text-slate-600">Preferred Date</label>
                   <input id="public-date" type="date" min="2025-07-26" class="w-full p-2 border border-slate-300 rounded-md">
                 </div>
@@ -202,10 +214,13 @@
 
     function submitPublicRequest() {
       const serviceType = document.getElementById('public-service-type').value;
+      const name = document.getElementById('public-name').value;
+      const email = document.getElementById('public-email').value;
+      const phone = document.getElementById('public-phone').value;
       const date = document.getElementById('public-date').value;
       const time = document.getElementById('public-time').value;
-      if (!date || !time) {
-        alert('Please select a date and time');
+      if (!date || !time || !name || !email || !phone) {
+        alert('Please fill in all fields');
         return;
       }
       const start = `${date}T${time}:00`;
@@ -220,10 +235,16 @@
         clientId: 'public',
         status: 'pending',
         public: false,
+        name,
+        email,
+        phone
       };
       saveLocalEvent(event);
       alert('Service request submitted! Awaiting confirmation.');
       document.getElementById('public-service-type').value = '20 Minute Walk';
+      document.getElementById('public-name').value = '';
+      document.getElementById('public-email').value = '';
+      document.getElementById('public-phone').value = '';
       document.getElementById('public-date').value = '';
       document.getElementById('public-time').value = '';
     }
