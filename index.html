@@ -5,10 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Leashed - Dog Walking & Pet Services</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.js"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;600&family=Nunito+Sans:wght@400;700&display=swap" rel="stylesheet">
+  <script src="https://www.google.com/recaptcha/api.js" async defer></script>
   <style>
     html { scroll-padding-top: 120px; scroll-behavior: smooth; }
     body { font-family: 'Nunito Sans', sans-serif; background-color: #F8FAFC; }
@@ -122,12 +122,6 @@
               <p class="text-lg text-slate-600 mb-4">
                 We're proud to partner with fellow animal lovers to extend our reliable and loving pet care services. They share our passion for animals and commitment to exceptional service.
               </p>
-              <h3 class="text-xl font-semibold mb-2">Available Times</h3>
-              <div id="public-calendar" class="max-h-[400px] overflow-auto p-4 sm:p-0"></div>
-              <div class="mt-4 text-sm text-slate-600">
-                <p><span class="inline-block w-4 h-4 bg-blue-800 mr-2"></span>Available</p>
-                <p><span class="inline-block w-4 h-4 bg-red-600 mr-2"></span>Booked</p>
-              </div>
               <h3 class="text-xl font-semibold mt-4 mb-2">Request a Service</h3>
               <div class="space-y-4">
                 <div>
@@ -161,6 +155,9 @@
                   <label for="public-time" class="block text-slate-600">Preferred Time</label>
                   <input id="public-time" type="time" class="w-full p-2 border border-slate-300 rounded-md">
                 </div>
+                <div>
+                  <div class="g-recaptcha" data-sitekey="6LeUdKQrAAAAAKIi8VHLr3p9HYb-rxNM-CBeUFbs"></div>
+                </div>
                 <button class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600" onclick="submitPublicRequest()">Submit Request</button>
               </div>
             </div>
@@ -192,11 +189,9 @@
           calendarData = data;
           const localEvents = JSON.parse(localStorage.getItem('calendarEvents') || '[]');
           calendarData.events = [...calendarData.events, ...localEvents];
-          renderPublicCalendar();
         })
         .catch(() => {
           calendarData.events = JSON.parse(localStorage.getItem('calendarEvents') || '[]');
-          renderPublicCalendar();
         });
     }
     function saveLocalEvent(event) {
@@ -209,29 +204,12 @@
         body: JSON.stringify(event)
       }).catch(err => console.error('Webhook failed:', err));
     }
-    function renderPublicCalendar() {
-      const calendarEl = document.getElementById('public-calendar');
-      const calendar = new FullCalendar.Calendar(calendarEl, {
-        initialView: 'timeGridWeek',
-        events: calendarData.events.filter(e => e.public).map(event => ({
-          ...event,
-          title: event.status === 'available' ? 'Available' : 'Booked',
-          backgroundColor: event.status === 'available' ? '#1E3A8A' : '#DC2626',
-          borderColor: event.status === 'available' ? '#1E3A8A' : '#DC2626',
-          textColor: '#FFFFFF'
-        })),
-        eventDisplay: 'auto',
-        eventTextColor: '#FFFFFF',
-        eventClassNames: 'shadow-sm text-sm',
-        headerToolbar: { left: 'prev,next', center: 'title', right: 'timeGridWeek,dayGridMonth' },
-        slotMinTime: '08:00:00',
-        slotMaxTime: '20:00:00',
-        height: '400px',
-        eventMinWidth: 100 // Ensure enough width for full text
-      });
-      calendar.render();
-    }
     function submitPublicRequest() {
+      const recaptchaResponse = grecaptcha.getResponse();
+      if (!recaptchaResponse) {
+        alert('Please complete the CAPTCHA to verify you are not a robot.');
+        return;
+      }
       const serviceType = document.getElementById('public-service-type').value;
       const name = document.getElementById('public-name').value.trim();
       const email = document.getElementById('public-email').value.trim();
@@ -269,7 +247,8 @@
         public: false,
         name,
         email,
-        phone
+        phone,
+        recaptchaResponse
       };
       saveLocalEvent(event);
       alert('Service request submitted! Awaiting confirmation.');
@@ -279,6 +258,7 @@
       document.getElementById('public-phone').value = '';
       document.getElementById('public-date').value = '';
       document.getElementById('public-time').value = '';
+      grecaptcha.reset();
     }
     document.addEventListener('DOMContentLoaded', function () {
       const tabLinks = document.querySelectorAll('.tab-link, .button[data-tab]');
