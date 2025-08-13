@@ -8,7 +8,6 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;600&family=Nunito+Sans:wght@400;700&display=swap" rel="stylesheet">
-  <script src="https://www.google.com/recaptcha/api.js" async defer></script>
   <style>
     html { scroll-padding-top: 120px; scroll-behavior: smooth; }
     body { font-family: 'Nunito Sans', sans-serif; background-color: #F8FAFC; }
@@ -155,9 +154,6 @@
                   <label for="public-time" class="block text-slate-600">Preferred Time</label>
                   <input id="public-time" type="time" class="w-full p-2 border border-slate-300 rounded-md">
                 </div>
-                <div>
-                  <div class="g-recaptcha" data-sitekey="6LeUdKQrAAAAAKIi8VHLr3p9HYb-rxNM-CBeUFbs"></div>
-                </div>
                 <button class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600" onclick="submitPublicRequest()">Submit Request</button>
               </div>
             </div>
@@ -205,11 +201,6 @@
       }).catch(err => console.error('Webhook failed:', err));
     }
     function submitPublicRequest() {
-      const recaptchaResponse = grecaptcha.getResponse();
-      if (!recaptchaResponse) {
-        alert('Please complete the CAPTCHA to verify you are not a robot.');
-        return;
-      }
       const serviceType = document.getElementById('public-service-type').value;
       const name = document.getElementById('public-name').value.trim();
       const email = document.getElementById('public-email').value.trim();
@@ -247,8 +238,7 @@
         public: false,
         name,
         email,
-        phone,
-        recaptchaResponse
+        phone
       };
       saveLocalEvent(event);
       alert('Service request submitted! Awaiting confirmation.');
@@ -258,7 +248,6 @@
       document.getElementById('public-phone').value = '';
       document.getElementById('public-date').value = '';
       document.getElementById('public-time').value = '';
-      grecaptcha.reset();
     }
     document.addEventListener('DOMContentLoaded', function () {
       const tabLinks = document.querySelectorAll('.tab-link, .button[data-tab]');
