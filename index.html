@@ -16,6 +16,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;600&family=Nunito+Sans:wght@400;700&display=swap" rel="stylesheet">
+  <script src="https://www.google.com/recaptcha/api.js" async defer></script>
   <style>
     html { scroll-padding-top: 120px; scroll-behavior: smooth; }
     body { font-family: 'Nunito Sans', sans-serif; background-color: #F8FAFC; }
@@ -168,7 +169,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <input id="public-time" type="time" class="w-full p-2 border border-slate-300 rounded-md">
         </div>
 
-        <div class="g-recaptcha my-4" data-sitekey="6Le8P68rAAAAAGxDJTr2-oOU16dRScSrATgQniQC"></div>
+        <div class="g-recaptcha my-4" data-sitekey="6LeUdKQrAAAAAKIi8VHLr3p9HYb-rxNM-CBeUFbs"></div>
 
         <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600">Submit Request</button>
     </form>
@@ -272,7 +273,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 'g-recaptcha-response': token
             };
 
-            fetch('http://localhost:3000/submit-request', {
+            fetch('https://super-duper-computing-machine-pj649w6rvjw627qrp-3000.app.github.dev/submit-request', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(formData)
