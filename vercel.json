@@ -1,6 +1,6 @@
 {
   "functions": {
-    "api/**/*.js": {
+    "api/submit-request.js": {
       "runtime": "nodejs22.x"
     }
   }
