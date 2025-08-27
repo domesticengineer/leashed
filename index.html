@@ -16,7 +16,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;600&family=Nunito+Sans:wght@400;700&display=swap" rel="stylesheet">
-  <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+  <script src="https://www.google.com/recaptcha/api.js?render=6LeUdKQrAAAAAKIi8VHLr3p9HYb-rxNM-CBeUFbs"></script>
   <style>
     html { scroll-padding-top: 120px; scroll-behavior: smooth; }
     body { font-family: 'Nunito Sans', sans-serif; background-color: #F8FAFC; }
@@ -162,14 +162,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </div>
         <div>
             <label for="public-date" class="block text-slate-600">Preferred Date</label>
-            <input id="public-date" type="date" min="2025-07-26" class="w-full p-2 border border-slate-300 rounded-md">
+            <input id="public-date" type="date" min="2025-08-27" class="w-full p-2 border border-slate-300 rounded-md">
         </div>
         <div>
             <label for="public-time" class="block text-slate-600">Preferred Time</label>
             <input id="public-time" type="time" class="w-full p-2 border border-slate-300 rounded-md">
         </div>
-
-        <div class="g-recaptcha my-4" data-sitekey="6LeUdKQrAAAAAKIi8VHLr3p9HYb-rxNM-CBeUFbs"></div>
 
         <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600">Submit Request</button>
     </form>
@@ -265,51 +263,54 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             if (!phone || phone.length < 10) { return alert('Please provide a valid phone number (at least 10 digits).'); }
             if (!date || !time) { return alert('Please select a date and time.'); }
             
-            const token = grecaptcha.getResponse();
-            if (!token) { return alert('Please complete the CAPTCHA.'); }
+            grecaptcha.ready(function() {
+                grecaptcha.execute('6LeUdKQrAAAAAKIi8VHLr3p9HYb-rxNM-CBeUFbs', {action: 'submit_request'})
+                    .then(function(token) {
+                        const formData = {
+                            serviceType, name, email, phone, date, time,
+                            'g-recaptcha-response': token
+                        };
 
-            const formData = {
-                serviceType, name, email, phone, date, time,
-                'g-recaptcha-response': token
-            };
+                        fetch('https://super-duper-computing-machine-pj649w6rvjw627qrp-3000.app.github.dev/submit-request', {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify(formData)
+                        })
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data.success) {
+                                // --- ✅ CHANGE 2: Call the Zapier function AFTER server confirms success ---
+                                const start = `${date}T${time}:00`;
+                                const end = new Date(start);
+                                end.setHours(end.getHours() + 1);
+                                const event = {
+                                    id: `event${Date.now()}`,
+                                    title: `Requested: ${serviceType}`,
+                                    start,
+                                    end: end.toISOString(),
+                                    advocateId: null,
+                                    clientId: 'public',
+                                    status: 'pending',
+                                    public: false,
+                                    name, email, phone
+                                };
+                                saveLocalEvent(event); // <-- Call to your original function
 
-            fetch('https://super-duper-computing-machine-pj649w6rvjw627qrp-3000.app.github.dev/submit-request', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(formData)
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    // --- ✅ CHANGE 2: Call the Zapier function AFTER server confirms success ---
-                    const start = `${date}T${time}:00`;
-                    const end = new Date(start);
-                    end.setHours(end.getHours() + 1);
-                    const event = {
-                        id: `event${Date.now()}`,
-                        title: `Requested: ${serviceType}`,
-                        start,
-                        end: end.toISOString(),
-                        advocateId: null,
-                        clientId: 'public',
-                        status: 'pending',
-                        public: false,
-                        name, email, phone
-                    };
-                    saveLocalEvent(event); // <-- Call to your original function
-
-                    alert('Service request submitted! Awaiting confirmation.');
-                    serviceRequestForm.reset();
-                    grecaptcha.reset();
-                } else {
-                    alert('Failed to submit request: ' + data.message);
-                    grecaptcha.reset();
-                }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                alert('An error occurred. Please try again.');
-                grecaptcha.reset();
+                                alert('Service request submitted! Awaiting confirmation.');
+                                serviceRequestForm.reset();
+                            } else {
+                                alert('Failed to submit request: ' + data.message);
+                            }
+                        })
+                        .catch(error => {
+                            console.error('Error:', error);
+                            alert('An error occurred. Please try again.');
+                        });
+                    })
+                    .catch(error => {
+                        console.error('reCAPTCHA execute error:', error);
+                        alert('reCAPTCHA failed. Please try again.');
+                    });
             });
         });
         
