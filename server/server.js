@@ -7,12 +7,16 @@ const RECAPTCHA_SECRET_KEY = process.env.RECAPTCHA_SECRET_KEY;
 const app = express();
 
 app.use(cors({
-    origin: ['https://domesticengineer.github.io', 'https://stayleashed.com']
+    origin: ['https://domesticengineer.github.io', 'https://stayleashed.com', '*.app.github.dev']
 }));
 app.use(express.json());
 
 app.post('/submit-request', async (req, res) => {
     const { serviceType, name, email, phone, date, time, 'g-recaptcha-response': recaptchaToken } = req.body;
+
+    if (!recaptchaToken) {
+        return res.json({ success: false, message: 'No reCAPTCHA token provided' });
+    }
 
     try {
         const verificationResponse = await axios.post(
@@ -27,14 +31,24 @@ app.post('/submit-request', async (req, res) => {
             }
         );
 
-        if (!verificationResponse.data.success) {
-            return res.json({ success: false, message: 'reCAPTCHA verification failed' });
+        const data = verificationResponse.data;
+
+        if (!data.success) {
+            return res.json({ success: false, message: 'reCAPTCHA verification failed: ' + (data['error-codes'] ? data['error-codes'].join(', ') : 'unknown error') });
+        }
+
+        if (data.score < 0.5) {
+            return res.json({ success: false, message: 'reCAPTCHA score too low—please try again or contact support' });
+        }
+
+        if (data.action !== 'submit_request') {
+            return res.json({ success: false, message: 'reCAPTCHA action mismatch' });
         }
 
         res.json({ success: true });
     } catch (error) {
-        console.error('Error:', error);
-        res.json({ success: false, message: 'Server error' });
+        console.error('Server error during reCAPTCHA verification:', error);
+        res.json({ success: false, message: 'Server error during verification' });
     }
 });
 
