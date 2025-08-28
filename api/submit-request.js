@@ -1,17 +1,14 @@
 const axios = require('axios');
 
 module.exports = async (req, res) => {
-  if (req.method === 'OPTIONS') {
-    res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader('Access-Control-Allow-Methods', 'POST');
-    res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
-    res.status(200).end();
-    return;
-  }
-
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'POST');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+
+  if (req.method === 'OPTIONS') {
+    res.status(200).end();
+    return;
+  }
 
   if (req.method !== 'POST') {
     return res.status(405).json({ success: false, message: 'Method Not Allowed' });
@@ -28,7 +25,7 @@ module.exports = async (req, res) => {
       'https://www.google.com/recaptcha/api/siteverify',
       new URLSearchParams({
         secret: process.env.RECAPTCHA_SECRET_KEY,
-        response: reCAPTCHA_token,
+        response: recaptchaToken,
         remoteip: req.headers['x-forwarded-for'] || req.connection.remoteAddress
       }),
       {
@@ -39,7 +36,7 @@ module.exports = async (req, res) => {
     const data = verificationResponse.data;
 
     if (!data.success) {
-      return res.status(400).json({ success: false, message: 'reCAPTCHA verification failed: ' + (data['error-codes'] ? data['error-codes'].join(', ') : 'unknown error' ) });
+      return res.status(400).json({ success: false, message: 'reCAPTCHA verification failed: ' + (data['error-codes'] ? data['error-codes'].join(', ') : 'unknown error') });
     }
 
     if (data.score < 0.5) {
