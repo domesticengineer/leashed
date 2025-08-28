@@ -1,8 +1,19 @@
 {
-  "rewrites": [
+  "version": 2,
+  "builds": [
+    { "src": "server/server.js", "use": "@vercel/node" }
+  ],
+  "routes": [
+    { "src": "/api/submit-request", "dest": "/server/server.js" }
+  ],
+  "headers": [
     {
-      "source": "/api/submit-request",
-      "destination": "/api/submit-request.js"
+      "source": "/api/(.*)",
+      "headers": [
+        { "key": "Access-Control-Allow-Origin", "value": "*" },
+        { "key": "Access-Control-Allow-Methods", "value": "GET, POST, OPTIONS" },
+        { "key": "Access-Control-Allow-Headers", "value": "Content-Type" }
+      ]
     }
   ]
 }
