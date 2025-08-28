@@ -1,7 +1,13 @@
 {
   "functions": {
     "api/submit-request.js": {
-      "runtime": "nodejs@18.x"
+      "runtime": "nodejs20.x"
     }
-  }
+  },
+  "rewrites": [
+    {
+      "source": "/api/submit-request",
+      "destination": "/api/submit-request.js"
+    }
+  ]
 }
