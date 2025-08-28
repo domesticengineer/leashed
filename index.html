@@ -247,7 +247,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         });
 
         // --- (The form submission logic starts here) ---
-        const serviceRequestForm = document.getElementById('service-request-form');
+      
+const serviceRequestForm = document.getElementById('service-request-form');
         
         serviceRequestForm.addEventListener('submit', function (e) {
             e.preventDefault();
@@ -273,12 +274,17 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                             'g-recaptcha-response': token
                         };
 
-                        fetch('https://leashed-app-pro.vercel.app/api/submit-request', {
+                        fetch('https://leashed.vercel.app/api/submit-request', {
                             method: 'POST',
                             headers: { 'Content-Type': 'application/json' },
                             body: JSON.stringify(formData)
                         })
-                        .then(response => response.json())
+                        .then(response => {
+                            if (!response.ok) {
+                                throw new Error('Network response was not ok');
+                            }
+                            return response.json();
+                        })
                         .then(data => {
                             if (data.success) {
                                 // --- ✅ CHANGE 2: Call the Zapier function AFTER server confirms success ---
@@ -320,5 +326,5 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         loadCalendarData();
     });
 </script>
-  </body>
+</body>
 </html>
