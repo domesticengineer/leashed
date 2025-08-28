@@ -1,7 +1,8 @@
 {
+  "version": 2,
   "functions": {
     "api/submit-request.js": {
-      "runtime": "nodejs20.x"
+      "runtime": "@vercel/node@2.1.1"
     }
   },
   "rewrites": [
