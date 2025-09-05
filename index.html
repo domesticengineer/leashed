@@ -142,26 +142,47 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
               
 <!-- FATD BADGE CODE START -->
 <style>
-.fatd-badge-outer {
-width: 200px;
+.fatd-badge-container {
+  width: 200px;
+  margin: 10px auto; /* Center the badge and add spacing */
+  text-align: center;
+  font-family: Cambria, 'Times New Roman', Times, serif; /* Fallback fonts */
 }
-.fatd-badge-outer img {
-width: 200px;
+
+.fatd-badge-container img {
+  width: 100%;
+  max-width: 200px;
+  height: auto; /* Maintain aspect ratio */
+  display: block;
 }
+
 .fatd-doctor-name {
-text-align:center;
-font-size:18px;
-font-family:Cambria, Times, serif;
+  font-size: 18px;
+  margin-top: 5px;
+}
+
+.fatd-doctor-name a {
+  color: #333; /* Default color for visibility */
+  text-decoration: none; /* Remove underline from link */
+}
+
+.fatd-doctor-name a:hover {
+  text-decoration: underline; /* Add hover effect */
 }
 </style>
-<div class="fatd-badge-outer">
-<div class="fatd-badge-inner">
-<a class="fatd-badge-link" href="https://www.findatopdoc.com" target="_blank">
-<img class="fatd-badge-img" src="https://www.findatopdoc.com/doctor_images/fatd-badge.png" alt="Findatopdoc Top Doctor Badge" />
-</a>
+
+<div class="fatd-badge-container">
+  <a class="fatd-badge-link" href="https://www.findatopdoc.com" target="_blank">
+    <img class="fatd-badge-img" 
+         src="https://www.findatopdoc.com/doctor_images/fatd-badge.png" 
+         alt="Findatopdoc Top Doctor Badge" 
+         onerror="this.src='https://via.placeholder.com/200x200?text=Badge+Not+Found';" />
+  </a>
+  <div class="fatd-doctor-name">
+    <a href="https://www.findatopdoc.com" target="_blank">Yvonne Jensen, CNA, RNA, EKG-T/CMT</a>
+  </div>
 </div>
-<div class="fatd-doctor-name"><a href="https://www.findatopdoc.com" target="_blank">Yvonne Jensen, CNA, RNA, EKG-T/CMT</a></div>
-</div>
+<!-- FATD BADGE CODE END -->
 
               </p>
             </div>
